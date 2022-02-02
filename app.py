@@ -79,7 +79,7 @@ class PostCard(Resource):
 
 
 class Card(Resource):
-    """Used to access an existing credit card in the system,"""
+    """Used to access an existing credit card in the system."""
 
     def get(self, card_token):
         """Returns the credit card which is assigned to the token.
