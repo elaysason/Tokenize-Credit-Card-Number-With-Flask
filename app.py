@@ -35,8 +35,7 @@ def card_check(input, method):
     """Checks if the input is legal and making small transitions on it.
     :param input: The input given to be a credit card and needs to be checked and transformed.
     :param method: The method which the credit card check is called from.
-    :return: card: if the input is valid credit card and didn't exist before, the card. Otherwise, the error or
-    invalid credit card number.
+    :return: card: The input is valid credit card and didn't exist before, the card.
     """
     card = input.replace(' ', '')
     try:
@@ -84,8 +83,7 @@ class Card(Resource):
     def get(self, card_token):
         """Returns the credit card which is assigned to the token.
         :param card_token: The token which the credit card with that token should be changed
-        :return JSON with "credit-card" as key and the credit card itself as value if the card is valid
-        else "error_message" as key and the reason as value.
+        :return JSON with "credit-card" as key and the credit card itself as value
         """
         try:
             app.logger.debug(' |  Get credit card. [token = ' + card_token + ']')
