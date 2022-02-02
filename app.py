@@ -82,8 +82,8 @@ class Card(Resource):
     """Used to access an existing credit card in the system,"""
 
     def get(self, card_token):
-        """Get the credit card which is assigned to the token.
-        :param input: The input given to be a credit card and needs to be checked and transformed.
+        """Returns the credit card which is assigned to the token.
+        :param card_token: The token which the credit card with that token should be changed
         :return JSON with "credit-card" as key and the credit card itself as value if the card is valid
         else "error_message" as key and the reason as value.
         """
@@ -94,7 +94,7 @@ class Card(Resource):
             raise BadInput('No credit matching this token', 'GET')
 
     def put(self, card_token):
-        """Returns the credit card which is assigned to the token.
+        """Change the card which is assigned to the token.
         :param card_token: The token which the credit card with that token should be changed
         :return JSON with "token" with the token which was changed , and "credit-card"
         as key and the credit card itself as value if the new card is valid.
