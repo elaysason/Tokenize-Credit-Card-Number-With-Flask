@@ -16,12 +16,16 @@ def card_check(input, method):
     :param method: The method which the credit card check is called from.
     :return: card: if the input is valid credit card and didn't exist before, the card.
     """
-    card = input.replace(' ', '')
+
     try:
+        if "credit-card" in list(input.keys()):
+            card = input["credit-card"].replace(' ', '')
+        else:
+            app.logger.warning('| ' + method + ' request refused.' + 'Invalid JSON')
+            raise abort(400, """Invlaid JSON, "credit-card" should be the key of your card""")
         card_parts = [digits for digits in card.split('-')]
-        json_input_parts = {"credit-card": card_parts}
-        is_valid = Schema({"credit-card": And([str], lambda x: (
-                all([len(part) == 4 for part in card_parts]) and len(x) == 4))}).validate(json_input_parts)
+        is_valid = Schema(And([str], lambda x: (
+                all([len(part) == 4 for part in card_parts]) and (len(x) == 4))).validate(card_parts)
         is_valid_number = fl.verify(card.replace('-', ''))
         if is_valid_number:
             if card in list(credit_cards.values()):
@@ -34,14 +38,13 @@ def card_check(input, method):
             abort(400, "Credit card number isn't valid according to Luhn Algorithm")
     except KeyError as err:
         app.logger.warning('| ' + method + ' request refused.' + 'Invalid JSON')
-        raise abort(400, 'Invlaid JSON')
+        raise abort(400, 'Invlaid JSON.')
     except SchemaError:
         app.logger.warning('| ' + method + ' request refused.' + 'Invalid credit card number')
-        abort(400, "Credit card number structure isn't valid")
-
-
+        abort(400, "Credit card number structure isn't valid.")
 class PostCard(Resource):
     """Enter a new credit card into the system"""
+
     def post(self):
         """Add the new credit card
         :return JSON with "token" as key and the token value if the card is valid else "message" as
@@ -49,7 +52,7 @@ class PostCard(Resource):
         """
         json_input = request.get_json()
         token = uuid4()
-        card = card_check(json_input['credit-card'], 'POST')
+        card = card_check(json_input, 'POST')
         credit_cards[str(token)] = card
         app.logger.info(' | Created new credit card. [credit_card = ' + credit_cards[str(token)] + ', token = ' + str(token) + ']')
         return jsonify({"token": token})
@@ -79,14 +82,13 @@ class Card(Resource):
         json_input = request.get_json()
         card_number = ''
         app.logger.debug(' |  Get credit card. [token = ' + card_token + ']')
-        try:
-            old = credit_cards[card_token]
-        except KeyError:
+        if card_token not in credit_cards in list(credit_cards.keys()):
             app.logger.warning('| ' + 'PUT' + ' request refused.' + 'No credit matching this token')
             abort(400, 'No credit matching this token')
-        card = card_check(json_input['credit-card'], 'PUT')
+        card = card_check(json_input, 'PUT')
         credit_cards[card_token] = card
         return jsonify({'token': card_token, 'credit-card': credit_cards[card_token]})
+
 
 api.add_resource(PostCard, '/creditcard')
 api.add_resource(Card, '/creditcard/<string:card_token>')
