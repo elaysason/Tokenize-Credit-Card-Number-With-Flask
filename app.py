@@ -24,8 +24,9 @@ def card_check(input, method):
             app.logger.warning('| ' + method + ' request refused.' + 'Invalid JSON')
             raise abort(400, """Invlaid JSON, "credit-card" should be the key of your card""")
         card_parts = [digits for digits in card.split('-')]
+        ## Assums structure of 4 part and '-' separting between them.
         is_valid = Schema(And([str], lambda x: (
-                all([len(part) == 4 for part in card_parts]) and (len(x) == 4))).validate(card_parts)
+                all([len(part) == 4 for part in card_parts]) and len(x) == 4))).validate(card_parts)
         is_valid_number = fl.verify(card.replace('-', ''))
         if is_valid_number:
             if card in list(credit_cards.values()):
@@ -41,7 +42,9 @@ def card_check(input, method):
         raise abort(400, 'Invlaid JSON.')
     except SchemaError:
         app.logger.warning('| ' + method + ' request refused.' + 'Invalid credit card number')
-        abort(400, "Credit card number structure isn't valid.")
+        abort(400, "Credit card number structure isn't valid,Make sure your card is 16 digits long and separted to 4 equal part by -.")
+
+        
 class PostCard(Resource):
     """Enter a new credit card into the system"""
 
@@ -81,7 +84,7 @@ class Card(Resource):
         """
         json_input = request.get_json()
         card_number = ''
-        app.logger.debug(' |  Get credit card. [token = ' + card_token + ']')
+                app.logger.debug(' |  Get credit card. [token = ' + card_token + ']')
         if card_token not in credit_cards in list(credit_cards.keys()):
             app.logger.warning('| ' + 'PUT' + ' request refused.' + 'No credit matching this token')
             abort(400, 'No credit matching this token')
