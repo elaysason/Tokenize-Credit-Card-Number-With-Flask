@@ -1,5 +1,5 @@
 server{
-        server_name 3.213.14.50;
+        server_name localhost;
         auth_basic "Restricted Content";
         auth_basic_user_file /etc/nginx/.htpasswd;
         
