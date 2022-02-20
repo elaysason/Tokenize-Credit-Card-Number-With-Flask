@@ -29,6 +29,7 @@ The response is a unique id that represents the credit card token:
 {"token": "1e6e8ff7-4aec-4877-b52e-282e02c38919"}
 
 3. To get the card:
+
 ```
    $ curl -X GET http://localhost:8081/creditcard/1e6e8ff7-4aec-4877-b52e-282e02c38919
 ```
