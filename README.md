@@ -31,4 +31,4 @@ The response is a unique id that represents the credit card token:
 ```
    $ curl -X GET http://localhost:8081/creditcard/1e6e8ff7-4aec-4877-b52e-282e02c38919
 ```
-or enter to http://localhost:8081/creditcard/1e6e8ff7-4aec-4877-b52e-282e02c38919 to your favorite browser.
+or enter to http://localhost:8081/creditcard/1e6e8ff7-4aec-4877-b52e-282e02c38919 (the number after creidtcard is the specific token you got the one I entered is just an example) to your favorite browser.
