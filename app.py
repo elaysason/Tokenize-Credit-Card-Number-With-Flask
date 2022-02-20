@@ -98,4 +98,4 @@ api.add_resource(Card, '/creditcard/<string:card_token>')
 
 if __name__ == "__main__":
     app.debug = True
-    serve(app, host='localhost', port=80, threads=1)
+    serve(app, host='localhost', port=8081, threads=1)
