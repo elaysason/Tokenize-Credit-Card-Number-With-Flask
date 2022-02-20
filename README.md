@@ -1,11 +1,8 @@
 # Tokenize-Credit-Card-Number-With-Flask
 Credit Card Tokonizer App.Restful api used to toknize credit card numbers using flask api.
-1. [Program Structure](https://github.com/elaysason/Weather-Prediction-Project/blob/main/README.md#program-structure)  
-2. [Installation](#Installation)
-3. [Usage](#Usage)
+1. [Installation](#Installation)
+2. [Usage](#Usage)
 3. [Footnote](#footnote)
-
-## Program Structure
 
 ## Installation
 1.Open the terminal
@@ -40,3 +37,5 @@ or enter to http://localhost:8081/creditcard/1e6e8ff7-4aec-4877-b52e-282e02c3891
 ```
    $ curl -X PUT http://localhost:8081/creditcard/1e6e8ff7-4aec-4877-b52e-282e02c38919 -d'{"credit-card":"4929-2059-4747-5013"}'
 ```
+## Footnote
+The credit card entred is checked if it is legal using luhn for the number itself and schema for the structure.
