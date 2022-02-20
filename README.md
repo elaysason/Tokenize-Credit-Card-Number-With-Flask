@@ -23,8 +23,12 @@ Credit Card Tokonizer App.Restful api used to toknize credit card numbers using 
 1. open a new terminal instance
 2. Insert a new card by 
 ```
-curl -X POST -H "Content-Type: application/json" http://localhost:8081/creditcard -d'{"credit-card":"1234-5678-9101- 1121"}'
+   $ curl -X POST -H "Content-Type: application/json" http://localhost:8081/creditcard -d'{"credit-card":"4716-1923-6816-9803"}'
 ```
-
-
-
+The response is a unique id that represents the credit card token:
+{"token": "1e6e8ff7-4aec-4877-b52e-282e02c38919"}
+3. To get the card:
+```
+   $ curl -X GET http://localhost:8081/creditcard/1e6e8ff7-4aec-4877-b52e-282e02c38919
+```
+or enter to http://localhost:8081/creditcard/1e6e8ff7-4aec-4877-b52e-282e02c38919 to your favorite browser.
