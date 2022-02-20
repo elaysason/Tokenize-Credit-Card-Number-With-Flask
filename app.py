@@ -84,7 +84,7 @@ class Card(Resource):
         """
         json_input = request.get_json()
         card_number = ''
-                app.logger.debug(' |  Get credit card. [token = ' + card_token + ']')
+        app.logger.debug(' |  Get credit card. [token = ' + card_token + ']')
         if card_token not in credit_cards in list(credit_cards.keys()):
             app.logger.warning('| ' + 'PUT' + ' request refused.' + 'No credit matching this token')
             abort(400, 'No credit matching this token')
