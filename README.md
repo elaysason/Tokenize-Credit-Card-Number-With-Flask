@@ -1,8 +1,11 @@
 # Tokenize-Credit-Card-Number-With-Flask
 Credit Card Tokonizer App.Restful api used to toknize credit card numbers using flask api.
-1. [Installation](#Installation)
-2. [Usage](#Usage)
-3. [Footnote](#footnote)
+1. [General](#General)
+2. [Installation](#Installation)
+3. [Usage](#Usage)
+4. [Footnote](#footnote)
+## General
+This is an api that its main goal is to store credit cards and tokenize them after verifying that the card has a valid number.
 
 ## Installation
 1.Open the terminal
