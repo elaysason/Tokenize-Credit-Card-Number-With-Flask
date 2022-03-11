@@ -41,4 +41,4 @@ or enter to http://localhost:8081/creditcard/1e6e8ff7-4aec-4877-b52e-282e02c3891
    $ curl -X PUT http://localhost:8081/creditcard/1e6e8ff7-4aec-4877-b52e-282e02c38919 -d'{"credit-card":"4929-2059-4747-5013"}'
 ```
 ## Footnote
-The credit card entred is checked if it is legal using luhn for the number itself and schema for the structure.
+The credit card entred is checked if it is legal using luhn for the number itself and schema for the structure.The app is deployed using waitress on a amazon ec2 server.
